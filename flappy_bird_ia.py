@@ -6,6 +6,7 @@ import math
 pygame.init()
 
 mafont = pygame.font.SysFont("monospace",35,True)
+bird = pygame.image.load('bird.png')
 
 def distance(x1,y1,x2,y2):
 	return ((x1 - x2)**2 + (y1 - y2)**2)**(1/2)
@@ -78,7 +79,8 @@ class Joueur():
 		self.vitesse = 0
 	
 	def dessine(self,ecran):
-		pygame.draw.circle(ecran,(255,211,25),(int(self.x),int(self.y)),15)
+		#pygame.draw.circle(ecran,(255,211,25),(int(self.x),int(self.y)),15)
+		ecran.blit(bird,(int(self.x)-30,int(self.y)-30))
 
 	def bouge(self):
 		if self.saute:
@@ -131,8 +133,8 @@ class Passage():
 		self.passe = False
 
 	def dessine(self,ecran):
-		pygame.draw.rect(ecran,(76,187,23),(self.x,0,80,self.hauteur - 180))
-		pygame.draw.rect(ecran,(76,187,23),(self.x,self.hauteur,80,560 - self.hauteur))
+		pygame.draw.rect(ecran,(76,187,23),(int(self.x),0,80,int(self.hauteur - 180)))
+		pygame.draw.rect(ecran,(76,187,23),(int(self.x),self.hauteur,80,int(560 - self.hauteur)))
 
 	def avance(self):
 		self.x -= 0.3
