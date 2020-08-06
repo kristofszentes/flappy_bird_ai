@@ -68,14 +68,19 @@ class Jeu():
 		ecran.fill((52,204,255))
 		pygame.draw.rect(ecran,(154,94,0),(0,560,480,80))
 		
+		#drawing the green rectangles
 		for passage in passa:
 			passage.dessine(ecran)
 
+		#drawing the player(s)
 		for joueur in persos:
 			joueur.dessine(ecran)
 			
 			texte_score = mafont.render("SCORE: " + str(joueur.score),1,(0,0,0)) 
 			ecran.blit(texte_score,(5,5))
+		
+		texte_instru = mafont.render("Left Click to jump",1,(0,0,0))
+		ecran.blit(texte_instru,(20,self.hauteur - 50))
 
 		pygame.display.update()
 
@@ -91,6 +96,8 @@ class Jeu():
 		indice_passage = 1
 
 		while cont:
+
+			pygame.time.delay(1)
 
 			events = pygame.event.get()
 			for event in events:
