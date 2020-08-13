@@ -6,7 +6,8 @@ import math
 pygame.init()
 
 mafont = pygame.font.SysFont("monospace",35,True)
-bird = pygame.image.load('bird.png')
+bird = pygame.image.load('images/bird.png')
+background = pygame.image.load('images/flappy_bird_background.png')
 
 def distance(x1,y1,x2,y2):
 	return ((x1 - x2)**2 + (y1 - y2)**2)**(1/2)
@@ -134,7 +135,7 @@ class Passage():
 
 	def dessine(self,ecran):
 		pygame.draw.rect(ecran,(76,187,23),(int(self.x),0,80,int(self.hauteur - 180)))
-		pygame.draw.rect(ecran,(76,187,23),(int(self.x),self.hauteur,80,int(560 - self.hauteur)))
+		pygame.draw.rect(ecran,(76,187,23),(int(self.x),self.hauteur,80,int(640 - self.hauteur)))
 
 	def avance(self):
 		self.x -= 0.3
@@ -148,8 +149,9 @@ class Jeu():
 		self.record = 0
 
 	def maj_ecran(self,ecran,persos,passa,generation,score):
-		ecran.fill((52,204,255))
-		pygame.draw.rect(ecran,(154,94,0),(0,560,480,80))
+		#ecran.fill((52,204,255))
+		#pygame.draw.rect(ecran,(154,94,0),(0,560,480,80))
+		ecran.blit(background,(0,0))
 		
 		for passage in passa:
 			passage.dessine(ecran)
@@ -157,7 +159,7 @@ class Jeu():
 		for joueur in persos:
 			joueur.dessine(ecran)
 			
-		texte_en_vie = mafont.render("en vie: " + str(len(persos)),1,(0,0,0)) 
+		texte_en_vie = mafont.render("alive: " + str(len(persos)),1,(0,0,0)) 
 		ecran.blit(texte_en_vie,(5,5))
 
 		texte_gen = mafont.render("generation: " + str(generation),1,(0,0,0))
@@ -182,6 +184,12 @@ class Jeu():
 
 		roaster = initialisation(100)
 		joueurs = list(roaster)
+
+		#optimizing the blitting of these images
+		global bird
+		bird = bird.convert_alpha()
+		global background
+		background = background.convert()
 		
 		while cont:
 

@@ -1,10 +1,11 @@
 import pygame
 import random
+import os
 pygame.init()
 
 mafont = pygame.font.SysFont("monospace",35,True)
-bird = pygame.image.load('bird.png')
-background = pygame.image.load('flappy_bird_background.png')
+bird = pygame.image.load('images/bird.png')
+background = pygame.image.load('images/flappy_bird_background.png')
 
 class Joueur():
 	def __init__(self,x,y):
@@ -55,7 +56,7 @@ class Passage():
 
 	def dessine(self,ecran):
 		pygame.draw.rect(ecran,(76,187,23),(int(self.x),0,80,int(self.hauteur - 180)))
-		pygame.draw.rect(ecran,(76,187,23),(int(self.x),self.hauteur,80,int(560 - self.hauteur)))
+		pygame.draw.rect(ecran,(76,187,23),(int(self.x),self.hauteur,80,int(640 - self.hauteur)))
 
 	def avance(self):
 		self.x -= 0.3
@@ -68,8 +69,9 @@ class Jeu():
 		self.compteur = 500
 
 	def maj_ecran(self,ecran,persos,passa):
-		ecran.fill((52,204,255))
-		pygame.draw.rect(ecran,(154,94,0),(0,560,480,80))
+		#ecran.fill((52,204,255))
+		#pygame.draw.rect(ecran,(154,94,0),(0,560,480,80))
+		ecran.blit(background,(0,0))
 		
 		#drawing the green rectangles
 		for passage in passa:
@@ -97,6 +99,10 @@ class Jeu():
 		joueurs = [joueur]
 		passages = []
 		indice_passage = 1
+
+		#optimization
+		global background
+		background = background.convert()
 
 		while cont:
 
