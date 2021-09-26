@@ -2,7 +2,7 @@
 The "Flappy Bird" game along with an AI that tries to beat it.
 
 ##How it looks
-[Demo Image](/images/demo_flappy.png)
+![Demo Image](/images/demo_flappy.png)
 
 ## Required modules:
 numpy, pygame
