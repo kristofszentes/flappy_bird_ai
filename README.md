@@ -1,7 +1,7 @@
 # flappy_bird_ai
 The "Flappy Bird" game along with an AI that tries to beat it.
 
-##How it looks
+## How it looks
 ![Demo Image](/images/demo_flappy.png)
 
 ## Required modules:
